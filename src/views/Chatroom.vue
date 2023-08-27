@@ -1,15 +1,26 @@
 <template>
   <div class="container welcome">
+    <div v-if="isLoggedin">
      <signup />
+      Already have an account? <span @click="isLoggedin = !isLoggedin">Log in here.</span>
+    </div>
+    <div v-else>
       <login />
+      Don't have an account? <span @click="isLoggedin = !isLoggedin">Sign up now.</span>
+    </div>
   </div>
 </template>
 
 <script>
 import Signup from '@/components/Signup.vue'
 import Login from '@/components/Login.vue'
+import { ref } from 'vue'
 export default {
-  components: {Signup, Login}
+  components: {Signup, Login},
+  setup() {
+  let isLoggedin = ref(true)
+  return {isLoggedin}
+  }
 }
 </script>
 

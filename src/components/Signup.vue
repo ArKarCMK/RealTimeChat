@@ -4,16 +4,18 @@
     <input type="text"  placeholder="Name" v-model="displayName">
     <input type="text"  placeholder="email" v-model="email">
     <input type="text"  placeholder="password" v-model="password">
+    <div class="error">{{error}}</div>
     <button>Singup</button>
   </form>
-  <div class="error">{{error}}</div>
 </template>
 
 <script>  
 import { ref } from 'vue';
 import useSignup from '../composable/useSignup';
+import {useRouter} from 'vue-router';
 export default {
   setup() {
+    let router = useRouter();
     let displayName=ref("");
     let email=ref("");
     let password=ref("");
@@ -21,13 +23,12 @@ export default {
     let {error, createAccount } = useSignup()
 
     let signUp=  async ()=>{
-       try{
-        let res = await createAccount( email.value, password.value, displayName.value)
-       console.log(res.user)
-       }
-       catch{
-          error.value;
-       }
+      let res = await createAccount( email.value, password.value, displayName.value)
+      if(res) {
+        router.push({name: 'Chatroom'})
+
+      }
+  
     }
     return{displayName, email, password, signUp, error }
   }

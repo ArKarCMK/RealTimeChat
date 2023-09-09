@@ -4,23 +4,33 @@
         <p>{{ user.displayName }}</p>
         <p class="email">Logged in as {{ user.email }}</p>
     </div>
-    <button @click="logout">Logout</button>
+    <button @click="signOut">Logout</button>
   </nav>
+  <div>
+    <NewChatForm></NewChatForm>
+  </div>
 </template>
 
 <script>
+import NewChatForm from './NewChatForm'
 import { auth } from '@/firebase/config'
 import { ref } from 'vue'
+import {useRouter} from 'vue-router'
 import getUser from '../composable/getUser'
 import useLogout from '../composable/useLogout'
 import user from '../composable/getUser'
 export default {
+  components: { NewChatForm },
   setup() {
     // let autUser = ref({});
     
-
+    let router = useRouter();
 
     let logout = useLogout();
+    let signOut = ()=>{
+      logout();
+      // router.push({name:"Auth"})
+    }
 
     let user = getUser();
 
@@ -29,7 +39,7 @@ export default {
     //   user.value = _user
     // }) 
 
-    return {logout, user}
+    return {logout, user, signOut}
   }
 }
 </script>

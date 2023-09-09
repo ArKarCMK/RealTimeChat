@@ -3,7 +3,7 @@
   <form @submit.prevent="signUp">
     <input type="text"  placeholder="Name" v-model="displayName">
     <input type="text"  placeholder="email" v-model="email">
-    <input type="text"  placeholder="password" v-model="password">
+    <input type="password"  placeholder="password" v-model="password">
     <div class="error">{{error}}</div>
     <button>Singup</button>
   </form>

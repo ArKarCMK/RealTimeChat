@@ -26,8 +26,8 @@ export default {
         created_at: timestamp()
 
       }
-      await addDoc(chat);
       message.value = "";
+      await addDoc(chat);
     }
 
     return {message, handleSubmit}

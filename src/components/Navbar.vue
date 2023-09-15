@@ -7,6 +7,9 @@
     <button @click="signOut">Logout</button>
   </nav>
   <div>
+    <ChatWindow />
+  </div>
+  <div>
     <NewChatForm></NewChatForm>
   </div>
 </template>
@@ -19,8 +22,9 @@ import {useRouter} from 'vue-router'
 import getUser from '../composable/getUser'
 import useLogout from '../composable/useLogout'
 import user from '../composable/getUser'
+import ChatWindow from './ChatWindow.vue'
 export default {
-  components: { NewChatForm },
+  components: { NewChatForm, ChatWindow },
   setup() {
     // let autUser = ref({});
     

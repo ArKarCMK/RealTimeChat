@@ -9,12 +9,19 @@ const routes = [
     path: '/',
     name: 'Auth',
     component: Auth,
+    beforeEnter(to, from, next) {
+      if (auth.currentUser) {
+        next({ name: 'Chatroom' });
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/chatroom',
     name: 'Chatroom',
     component: Chatroom,
-    beforeEnter(to, form, next) {
+    beforeEnter(to, from, next) {
       if (auth.currentUser) {
         next();
       } else {
